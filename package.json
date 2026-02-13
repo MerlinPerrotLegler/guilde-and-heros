@@ -8,9 +8,9 @@
   "scripts": {
     "dev": "nuxt dev",
     "build": "npx prisma generate && nuxt build",
-    "preview": "node -r dotenv/config .output/server/index.mjs",
+    "preview": "node server.mjs",
     "postinstall": "nuxt prepare",
-    "start": "HOST=0.0.0.0 NITRO_HOST=0.0.0.0 node -r dotenv/config .output/server/index.mjs",
+    "start": "NITRO_HOST=0.0.0.0 NITRO_PORT=3000 PORT=3000 node server.mjs",
     "db:push": "npx prisma db push",
     "db:migrate": "npx prisma migrate dev",
     "db:seed": "npx prisma db seed",
