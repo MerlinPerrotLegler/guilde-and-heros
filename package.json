@@ -7,9 +7,10 @@
   },
   "scripts": {
     "dev": "nuxt dev",
-    "build": "npx prisma generate && npx prisma db push --skip-generate && nuxt build",
+    "build": "npx prisma generate && nuxt build",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
+    "start": "npx prisma db push --skip-generate && node .output/server/index.mjs",
     "db:push": "npx prisma db push",
     "db:migrate": "npx prisma migrate dev",
     "db:seed": "npx prisma db seed",
