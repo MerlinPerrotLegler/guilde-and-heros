@@ -95,15 +95,12 @@ L’app est disponible sur [http://localhost:3000](http://localhost:3000).
    - Le résultat est dans `.output/`, servi par Hostinger.
 
 4. **Commande de démarrage (Start command)**  
-   Dans hPanel, définir la commande de démarrage de l’app Node.js sur :
-   ```bash
-   npm run start
-   ```
-   ou directement :
-   ```bash
-   node .output/server/index.mjs
-   ```
-   Hostinger fournit en général la variable `PORT` ; Nitro l’utilise automatiquement.
+   Dans hPanel, définir la commande de démarrage sur **`npm run start`** (recommandé : le script force l’écoute sur `0.0.0.0` et le port fourni par l’hébergeur).  
+   Si tu dois utiliser une commande directe, ajoute dans les variables d’environnement de l’app :  
+   - `HOST=0.0.0.0`  
+   - `NITRO_HOST=0.0.0.0`  
+   et lance : `node .output/server/index.mjs`.  
+   Sans écoute sur `0.0.0.0`, le proxy Hostinger ne peut pas joindre l’app → 503.
 
 5. **Node.js**  
    Choisir la version Node.js 18+ dans les paramètres d’hébergement.
@@ -125,8 +122,8 @@ L’app est disponible sur [http://localhost:3000](http://localhost:3000).
 2. **Variables d’environnement en production**  
    En prod, le fichier `.env` **n’est pas chargé** par le serveur. Il faut définir toutes les variables (au minimum `DATABASE_URL`) dans hPanel (section env de l’app Node.js). Sinon l’app peut crasher au démarrage ou au premier appel API.
 
-3. **Port d’écoute**  
-   Le serveur utilise `process.env.PORT` (ou 3000 par défaut) et écoute sur `0.0.0.0`. Si Hostinger impose un port précis, définir `PORT` dans les variables d’environnement de l’app.
+3. **Binding (éviter 503)**  
+   L’app doit écouter sur **toutes les interfaces** (`0.0.0.0`), pas seulement localhost. Utiliser **`npm run start`** (le script définit `HOST=0.0.0.0` et `NITRO_HOST=0.0.0.0`). Si la commande de démarrage est une autre, ajouter dans les variables d’environnement : `HOST=0.0.0.0` et `NITRO_HOST=0.0.0.0`. Le port est lu via `PORT` ou `NITRO_PORT` (souvent fourni par Hostinger).
 
 4. **Répertoire de travail**  
    La commande de démarrage doit être exécutée depuis la racine du projet (là où se trouve le dossier `.output`). Si la config Hostinger lance `node server/index.mjs`, elle doit le faire avec le répertoire de travail = répertoire de sortie du build (souvent la racine du dépôt), pas depuis un sous-dossier.
