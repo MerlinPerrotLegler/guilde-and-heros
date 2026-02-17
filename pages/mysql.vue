@@ -8,6 +8,15 @@
       <div class="bg-slate-800 rounded-lg p-8 border border-slate-700">
         <h1 class="text-3xl font-bold text-white mb-8">🗄️ Test MySQL</h1>
 
+        <div>
+          <p class="text-sm text-white">DATABASE_URL: {{ $config.DATABASE_URL }}</p>
+          <p class="text-sm text-white">DATABASE_HOST: {{ $config.DATABASE_HOST }}</p>
+          <p class="text-sm text-white">DATABASE_PORT: {{ $config.DATABASE_PORT }}</p>
+          <p class="text-sm text-white">DATABASE_USER: {{ $config.DATABASE_USER }}</p>
+          <p class="text-sm text-white">DATABASE_PASSWORD: {{ $config.DATABASE_PASSWORD }}</p>
+          <p class="text-sm text-white">DATABASE_NAME: {{ $config.DATABASE_NAME }}</p>
+        </div>
+
         <!-- Test de connexion -->
         <div class="mb-8">
           <button 
